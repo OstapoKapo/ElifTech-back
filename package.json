@@ -1,0 +1,19 @@
+{
+  "name": "back",
+  "version": "1.0.0",
+  "description": "backend fro Eliftech project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OstapoKapo/ElifTech-back.git"
+  },
+  "author": "ostapokapo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OstapoKapo/ElifTech-back/issues"
+  },
+  "homepage": "https://github.com/OstapoKapo/ElifTech-back#readme"
+}
