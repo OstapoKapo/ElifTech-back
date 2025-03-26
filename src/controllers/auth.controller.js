@@ -119,7 +119,43 @@ async function uploadResult(req, res) {
        res.status(500).json({ message: err.message });
    }
 }
+async function deleteSurvey(req, res) {
+    const userEmail  = req.body.email;
+    const surveyName = req.body.surveyName;
+    console.log(userEmail)
+    console.log(surveyName)
+    try {
+        const deletedQuestion = await Question.findOneAndDelete({ name: surveyName });
+        const surveys = await Question.find({})
+        const user = await User.findOneAndUpdate(
+            { email: userEmail },
+            { $pull: { userQuestions: surveyName } }
+        );
+        res.status(200).json({
+            surveys: surveys,
+            dbUser: user
+        });
+    } catch(err) {
+        res.status(500).json({ message: err.message });
+    }
+}
+async function updateSurvey(req, res) {
+    const survey  = req.body.survey;
+
+    try {
+        const updatedSurvey = await Question.findOneAndUpdate(
+            { name: survey.name },
+            { $set: survey },
+            { new: true, upsert: true }
+        );        const surveys = await Question.find({})
+        res.status(200).json({
+            surveys: surveys,
+        });
+    } catch(err) {
+        res.status(500).json({ message: err.message });
+    }
+}
 
 
 
-module.exports = { signInUser, changeImgDbUser, getDbUserAndQuestions, loadSurveyToDb, uploadResult }
+module.exports = { signInUser, changeImgDbUser, getDbUserAndQuestions, loadSurveyToDb, uploadResult, deleteSurvey, updateSurvey }
