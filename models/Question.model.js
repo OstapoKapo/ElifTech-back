@@ -6,19 +6,24 @@ const questionSchema = new mongoose.Schema({
         description: String,
         questions: [
             {
-                type: String,
-                content: String,
-                answer: String
+                text: String,
+                answer: {type: String, require: false},
+                types: String,
+                options: {type: [{
+                        text: String,
+                        correct: Boolean,
+                    }], require: false}
             }
         ],
         maxTime: Number,
         results: [
             {
                 userName:String,
-                userTime: String,
-                userResult: Number
+                userTime: Number,
+                userResult: String
             }
         ],
+        rate: [Number]
 })
 
 const Question = mongoose.model('Question',questionSchema);
